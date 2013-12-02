@@ -24,3 +24,4 @@ def test_content():
     """
     conn = test_schema()
     conn.executescript(open(CONTENT_PATH).read())
+    return conn
