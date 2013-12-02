@@ -52,20 +52,15 @@ def list_storage(row):
     """
     List (in html) the contents of storage given by `row`.
     """
-    body = '<span class="storage_name">%s</span>' % (row[2])
-    items = g.db.execute('SELECT * FROM items WHERE storage=?',
-                         [row[0]]).fetchall()
-    if len(items) > 0:
-        body += '<ul class="items">'
-        for item in items:
-            body += '<li>%s</li>' % item[1]
-        body += '</ul>'
-    substor = g.db.execute('SELECT * FROM storage WHERE parent=?' +
-                           ' AND id!=parent',
-                           [row[0]]).fetchall()
-    if len(substor) > 0:
+    body = '<span class="name">%s</span>' % (row[2])
+    if row[3]:
+        body += '<p class="description">%s</p>' % (row[3])
+    inside = g.db.execute('SELECT * FROM storage WHERE parent=?' +
+                          ' AND id!=parent',
+                          [row[0]]).fetchall()
+    if len(inside) > 0:
         body += '<ul class="storage">'
-        for storage in substor:
+        for storage in inside:
             body += '<li>%s</li>' % list_storage(storage)
         body += '</ul>'
     return body

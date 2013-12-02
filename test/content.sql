@@ -8,6 +8,6 @@ INSERT INTO storage VALUES (6, 5, 'thrash can', NULL);
 
 -- And now the NULL-less style
 
-INSERT INTO items (id, name, storage) VALUES (1, 'tools', 4);
-INSERT INTO items (id, name, storage) VALUES (2, 'treasures', 3);
-INSERT INTO items (id, name, storage) VALUES (3, 'thrash', 6);
+INSERT INTO storage (name, parent) VALUES ('tools', 4);
+INSERT INTO storage (name, parent) VALUES ('treasures', 3);
+INSERT INTO storage (name, parent) VALUES ('thrash', 6);
