@@ -1,0 +1,14 @@
+<span class="name">{{name}}</span>
+<span class="add"><a href="#">add</a></span>
+<span class="edit"><a href="#">edit</a></span>
+<span class="delete"><a href="#">delete</a></span>
+{% if description %}
+<p class="description">{{description}}</p>
+{% endif %}
+{% if inside %}
+<ul>
+    {% for item in inside %}
+    <li>{{item|safe}}</li>
+    {% endfor %}
+</ul>
+{% endif %}

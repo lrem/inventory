@@ -6,7 +6,7 @@ Inventory
 Keep track of your attic treasury.
 """
 
-from flask import Flask, g
+from flask import Flask, g, render_template
 import sqlite3
 
 #import flask
@@ -45,25 +45,19 @@ def list_inventory():
     body = ""
     for root in roots:
         body += list_storage(root)
-    return body
+    return render_template('list.html', body=body)
 
 
 def list_storage(row):
     """
     List (in html) the contents of storage given by `row`.
     """
-    body = '<span class="name">%s</span>' % (row[2])
-    if row[3]:
-        body += '<p class="description">%s</p>' % (row[3])
-    inside = g.db.execute('SELECT * FROM storage WHERE parent=?' +
+    inside = g.db.execute('SELECT * FROM storage WHERE parent=?'
                           ' AND id!=parent',
                           [row[0]]).fetchall()
-    if len(inside) > 0:
-        body += '<ul class="storage">'
-        for storage in inside:
-            body += '<li>%s</li>' % list_storage(storage)
-        body += '</ul>'
-    return body
+    return render_template('item.html', name=row[2], description=row[3],
+                           inside=map(list_storage, inside))
+
 
 if __name__ == '__main__':
     APP.run(debug=True)
