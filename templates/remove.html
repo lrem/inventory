@@ -2,13 +2,17 @@
 <html>
 <head>
     <title>Inventory</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
+<h2>Remove</h2>
 <p>
 Are you sure you want to delete the selected item and everything stored inside?
 Everything that will be deleted:
 </p>
+<p>
 {{ body|safe }}
+</p>
 <form action="{{request.path}}" method="POST">
     <input type="submit" value="Yes, remove everything above">
     <input type="button" value="No" onclick="history.go(-1);">
