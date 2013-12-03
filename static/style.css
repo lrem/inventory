@@ -112,7 +112,7 @@ input {
   padding: 0;
 }
 
-span.add a, span.edit a, span.delete a {
+span.add a, span.edit a, span.delete a, span.info a {
     display: inline-block;
     color: #fff;
     padding: 0;
@@ -124,16 +124,20 @@ span.add a, span.edit a, span.delete a {
     overflow: hidden;
 }
 
-.add a {
+span.add a {
     background-image: url("/static/icons/plus.gif");
 }
 
-.edit a {
+span.edit a {
     background-image: url("/static/icons/edit.gif");
 }
 
-.delete a {
+span.delete a {
     background-image: url("/static/icons/x.gif");
+}
+
+span.info a {
+    background-image: url("/static/icons/info.gif");
 }
 
 table.edit th {
@@ -143,4 +147,4 @@ table.edit th {
 table.edit input, table.edit select, table.edit textarea {
     font-size: 1em;
     width: 26em;
-};
+}
