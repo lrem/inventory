@@ -67,8 +67,12 @@ def add(parent):
     Add a new item.
     """
     if request.method == 'POST':
+        if request.form['parent'] == 'TOP':
+            parent = None
+        else:
+            parent = request.form['parent']
         g.db.execute('INSERT INTO storage (parent, name, description) '
-                     'VALUES (?,?,?)', [request.form['parent'],
+                     'VALUES (?,?,?)', [parent,
                                         request.form['name'],
                                         request.form.get('description', None)])
         g.db.commit()
@@ -100,6 +104,57 @@ def options_rec(options, row, depth):
                             [row[0]]).fetchall()
     for child in children:
         options_rec(options, child, depth+1)
+
+
+@APP.route('/remove/<int:item>', methods=['GET', 'POST'])
+def remove(item):
+    """
+    Remove the given item and everything stored in it.
+    """
+    if request.method == 'POST':
+        remove_rec(item)
+        g.db.commit()
+        flash('OK')
+        return redirect(url_for('list_inventory'))
+    else:
+        row = g.db.execute('SELECT * FROM storage WHERE id=?',
+                           [item]).fetchone()
+        g.readonly = True
+        retval = render_template('remove.html', body=list_storage(row))
+        g.readonly = False
+        return retval
+
+
+def remove_rec(item):
+    """
+    Remove the subtree rooted in the given `item`.
+    """
+    children = g.db.execute('SELECT id FROM storage WHERE parent=?',
+                            [item]).fetchall()
+    g.db.execute('DELETE FROM storage WHERE id=?', [item])
+    for child in children:
+        remove_rec(child[0])
+
+
+@APP.route('/edit/<int:item>', methods=['GET', 'POST'])
+def edit(item):
+    """
+    Edit the item.
+    """
+    if request.method == 'POST':
+        g.db.execute('UPDATE storage SET parent=?, name=?, description=?'
+                     'WHERE id=?', [request.form['parent'],
+                                    request.form['name'],
+                                    request.form.get('description', None),
+                                    item])
+        g.db.commit()
+        flash('OK')
+        return redirect(url_for('list_inventory'))
+    else:
+        row = g.db.execute('SELECT * FROM storage WHERE id=?',
+                           [item]).fetchone()
+        return render_template('edit.html', parent=row[1], name=row[2],
+                               description=row[3], options=storage_options())
 
 if __name__ == '__main__':
     APP.secret_key = os.urandom(24)

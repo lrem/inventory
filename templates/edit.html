@@ -6,7 +6,8 @@
 <body>
 <form action="{{request.path}}" method="POST">
     <table class="edit">
-        <tr><th>Name</th><td><input type="text" name="name" required></td></tr>
+        <tr><th>Name</th><td><input type="text" name="name" 
+                value="{{name}}" required></td></tr>
         <tr><th>Stored in:</th><td>
             <select name="parent">
                 {% for location in options %}
@@ -15,11 +16,14 @@
                     {{location[1]|safe}}
                 </option>
                 {% endfor %}
+                <option value="TOP" 
+                        {% if parent==0 %}selected="True"{% endif %}>
+                    Top level item
+                </option>
             </select>
         </td></tr>
         <tr><th>Description:</th><td>
-                <textarea name="description">
-                </textarea>
+                <textarea name="description">{{description}}</textarea>
         </td></tr>
     </table>
     <input type="submit" value="Submit">

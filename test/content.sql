@@ -1,4 +1,4 @@
-INSERT INTO storage VALUES (0, NULL, 'warehouse', NULL);
+INSERT INTO storage VALUES (1234, NULL, 'warehouse', NULL);
 INSERT INTO storage VALUES (1, 0, 'left room', 'the one on the left');
 INSERT INTO storage VALUES (2, 1, 'shelves', NULL);
 INSERT INTO storage VALUES (3, 2, 'upper', NULL);

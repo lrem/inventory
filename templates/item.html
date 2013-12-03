@@ -1,7 +1,9 @@
 <span class="name">{{name}}</span>
+{% if not g.readonly %}
 <span class="add"><a href="add/{{id}}">add</a></span>
-<span class="edit"><a href="#{{id}}">edit</a></span>
-<span class="delete"><a href="#{{id}}">delete</a></span>
+<span class="edit"><a href="edit/{{id}}">edit</a></span>
+<span class="delete"><a href="remove/{{id}}">delete</a></span>
+{% endif %}
 {% if description %}
 <p class="description">{{description}}</p>
 {% endif %}
