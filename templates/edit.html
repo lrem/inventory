@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory</title>
+</head>
+<body>
+<form action="{{request.path}}" method="POST">
+    <table class="edit">
+        <tr><th>Name</th><td><input type="text" name="name" required></td></tr>
+        <tr><th>Stored in:</th><td>
+            <select name="parent">
+                {% for location in options %}
+                <option value="{{location[0]}}"
+                        {% if location[0]==parent %}selected="True"{% endif %}>
+                    {{location[1]|safe}}
+                </option>
+                {% endfor %}
+            </select>
+        </td></tr>
+        <tr><th>Description:</th><td>
+                <textarea name="description">
+                </textarea>
+        </td></tr>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
