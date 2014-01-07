@@ -7,7 +7,8 @@
       return $(desc).hide();
     });
     return $('span.info').click(function(event) {
-      return $(event.target).parent().parent().find('p.description').toggle();
+      $(event.target).parent().parent().find('p.description').toggle();
+      return event.preventDefault();
     });
   });
 

@@ -14,6 +14,7 @@ import os
 
 APP = Flask(__name__)
 DATABASE = 'inventory.db'
+APP.secret_key = os.urandom(24)
 
 
 @APP.before_request
@@ -22,7 +23,6 @@ def open_connection():
     Provides database connection for the context object.
     """
     if getattr(g, 'db', None) is None:
-        print "Connecting"
         g.db = sqlite3.connect(DATABASE)
 
 
@@ -77,7 +77,7 @@ def add(parent):
                                         request.form.get('description', None)])
         g.db.commit()
         flash('OK')
-        return redirect(url_for('list_inventory'))
+        return redirect('/')
     else:
         return render_template('edit.html', parent=parent,
                                options=storage_options())
@@ -157,5 +157,4 @@ def edit(item):
                                description=row[3], options=storage_options())
 
 if __name__ == '__main__':
-    APP.secret_key = os.urandom(24)
     APP.run(debug=True)
