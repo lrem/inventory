@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Schowki</title>
+    <title>{{_('Inventory')}}</title>
     <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-<h1>Schowki</h1>
+<h1>{{_('Inventory')}}</h1>
 {{ body|safe }}
 <p>
-<a href="add/0">Dodaj zupełnie osobny schowek</a>
+<a href="add/0">{{_('Add a new top-level storage')}}</a>
 </p>
 <script type="text/javascript" 
     src="{{ url_for('static', filename='js/jquery.min.js') }}">

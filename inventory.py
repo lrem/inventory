@@ -7,6 +7,7 @@ Keep track of your attic treasury.
 """
 
 from flask import Flask, g, render_template, request, flash, redirect, url_for
+from flask.ext.babel import Babel
 import sqlite3
 import os
 
@@ -15,6 +16,15 @@ import os
 APP = Flask(__name__)
 DATABASE = 'inventory.db'
 APP.secret_key = os.urandom(24)
+BABEL = Babel(APP)
+LANGUAGES = ['en', 'pl']
+
+@BABEL.localeselector
+def get_locale():
+    """
+    Chooses the best match between requested and supported languages.
+    """
+    return request.accept_languages.best_match(LANGUAGES)
 
 
 @APP.before_request

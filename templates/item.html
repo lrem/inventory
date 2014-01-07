@@ -1,8 +1,8 @@
 <span class="name">{{name}}</span>
 {% if not g.readonly %}
-<span class="add"><a href="add/{{id}}">dodaj</a></span>
-<span class="edit"><a href="edit/{{id}}">edytuj</a></span>
-<span class="delete"><a href="remove/{{id}}">usuń</a></span>
+<span class="add"><a href="add/{{id}}">{{_('Add')}}</a></span>
+<span class="edit"><a href="edit/{{id}}">{{_('Edit')}}</a></span>
+<span class="delete"><a href="remove/{{id}}">{{_('Delete')}}</a></span>
 {% endif %}
 {% if description %}
 <p class="description">{{description}}</p>

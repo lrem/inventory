@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Schowki</title>
+    <title>{{_('Inventory')}}</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
-<h2>Usuwanie</h2>
+<h1>{{_('Removal')}}</h1>
 <p>
-Czy masz pewność,
-że chcesz usunąć wybrany obiekt i wszystko co jest w nim umieszczone?
-Wszystko poniżej zostanie usunięte:
+{{_('
+Are you sure you want to delete the selected item and everything stored inside?
+Everything that will be deleted:
+')}}
 </p>
 <p>
 {{ body|safe }}
 </p>
 <form action="{{request.path}}" method="POST">
-    <input type="submit" value="Tak, usuń wszystko powyżej">
-    <input type="button" value="Nie" onclick="history.go(-1);">
+    <input type="submit" value="{{_('Yes, remove everything above')}}">
+    <input type="button" value="{{_('No')}}" onclick="history.go(-1);">
 </form>
 </body>
 </html>

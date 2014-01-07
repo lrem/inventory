@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Schowki</title>
+    <title>{{_('Inventory')}}</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
-<h1>Edycja</h1>
+<h1>{{_('Edition')}}</h1>
 <form action="{{request.path}}" method="POST">
     <table class="edit">
-        <tr><th>Nazwa:</th><td><input type="text" name="name" 
+        <tr><th>{{_('Name')}}:</th><td><input type="text" name="name" 
                 value="{{name}}" required></td></tr>
-        <tr><th>Umieszczone w:</th><td>
+        <tr><th>{{_('Stored in')}}:</th><td>
             <select name="parent">
                 {% for location in options %}
                 <option value="{{location[0]}}"
@@ -24,11 +24,11 @@
                 </option>
             </select>
         </td></tr>
-        <tr><th>Opis:</th><td>
+        <tr><th>{{_('Description')}}:</th><td>
                 <textarea name="description">{{description}}</textarea>
         </td></tr>
     </table>
-    <input type="submit" value="Zapisz">
+    <input type="submit" value="{{_('Save')}}">
 </form>
 </body>
 </html>
